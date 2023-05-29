@@ -1,0 +1,66 @@
+name: Release oc-rpm binary
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  update-build-binary:
+    name: Update repository and build binary
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Update repository
+        run: |
+          make update-repo
+      - name: Build binary
+        run: |
+          make build
+      - name: Set binary absolute path
+        run: |
+          echo "LINUX_PATH=$(readlink -f $(pwd)/oc-rpm_linux_amd64)" >> $GITHUB_OUTPUT
+          echo "DARWIN_PATH=$(readlink -f $(pwd)/oc-rpm_darwin_amd64)" >> $GITHUB_OUTPUT
+          echo "WINDOWS_PATH=$(readlink -f $(pwd)/oc-rpm_windows_amd64)" >> $GITHUB_OUTPUT
+        id: binary
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+      - name: Upload Linux assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.binary.outputs.LINUX_PATH }}
+          asset_name: oc-rpm_linux_amd64
+          asset_content_type: application/zip
+      - name: Upload Darwin assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.binary.outputs.DARWIN_PATH }}
+          asset_name: oc-rpm_darwin_amd64
+          asset_content_type: application/zip
+      - name: Upload Windows assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.binary.outputs.WINDOWS_PATH }}
+          asset_name: oc-rpm_windows_amd64
+          asset_content_type: application/zip

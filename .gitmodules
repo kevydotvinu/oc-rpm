@@ -1,0 +1,4 @@
+[submodule "oc"]
+        path = oc
+        url = https://github.com/openshift/oc
+        branch = master
