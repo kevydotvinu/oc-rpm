@@ -1,11 +1,11 @@
-## oc-quicklab
+## oc-rpm
 [![licence](https://img.shields.io/github/license/kevydotvinu/oc-rpm)](https://github.com/kevydotvinu/oc-rpm/blob/main/LICENSE)
 [![goversion](https://img.shields.io/github/go-mod/go-version/openshift/oc)](https://github.com/openshift/oc/blob/master/go.mod)
 [![downloads](https://img.shields.io/github/downloads/kevydotvinu/oc-rpm/total)](https://github.com/kevydotvinu/oc-rpm/releases)
 [![release](https://github.com/kevydotvinu/oc-rpm/actions/workflows/build-and-release.yaml/badge.svg)](https://github.com/kevydotvinu/oc-rpm/actions/workflows/build-and-release.yaml)
 [![openshiftplugin](https://img.shields.io/badge/openshift%20cli-plug--in-orange)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/extending-cli-plugins.html)
 
-### OpenShift CLI plug-in to list RPMs
+### OpenShift CLI plug-in to list release RPMs
 The oc-rpm is a CLI plug-in that works with oc/kubectl and gives the list of RPM packages in an OpenShift release.
 
 ### Prerequisites
