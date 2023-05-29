@@ -1,4 +1,4 @@
-name: Release oc-rpm binary
+name: oc-rpm
 on:
   workflow_dispatch:
   push:
