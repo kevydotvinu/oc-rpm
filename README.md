@@ -9,7 +9,8 @@
 The oc-rpm is a CLI plug-in that works with oc/kubectl and gives the list of RPM packages in an OpenShift release.
 
 ### Prerequisites
-- [OpenShift CLI](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/)
+- [OpenShift command-line interface (oc)](https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz)
+- [Pull secret](https://console.redhat.com/openshift/downloads#tool-pull-secret)
 
 ### Installation
 ```bash
