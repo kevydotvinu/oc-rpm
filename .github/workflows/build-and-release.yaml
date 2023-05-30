@@ -1,4 +1,4 @@
-name: oc-rpm
+name: build
 on:
   workflow_dispatch:
   push:

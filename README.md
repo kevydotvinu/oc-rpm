@@ -13,17 +13,17 @@ The oc-rpm is a CLI plug-in that works with oc/kubectl and gives the list of RPM
 
 ### Installation
 ```bash
-$ curl -#Lo oc-rpm $(curl -s https://api.github.com/repos/kevydotvinu/oc-rpm/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux")) | .browser_download_url')
-$ sudo mv oc-rpm /usr/local/bin/ && sudo chmod +x /usr/local/bin/oc-rpm
-$ oc rpm 4.13.0
+curl -#Lo oc-rpm $(curl -s https://api.github.com/repos/kevydotvinu/oc-rpm/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux")) | .browser_download_url')
+sudo mv oc-rpm /usr/local/bin/ && sudo chmod +x /usr/local/bin/oc-rpm
+oc rpm 4.13.0
 ```
 
 ### Usage
 ##### List RPMs in a local cluster
 ```bash
-$ oc rpm
+oc rpm
 ```
 ##### List RPMs in an OpenShift release
 ```bash
-$ oc rpm 4.13.0
+oc rpm 4.13.0
 ```
