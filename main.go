@@ -38,7 +38,7 @@ func RootCommand(f kcmdutil.Factory, streams genericclioptions.IOStreams) *cobra
 			oc rpm
 
 			# Show the list of RPMs in the release
-			oc rpm 4.11.2
+			oc rpm 4.13.0
 		`),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := cobra.MaximumNArgs(1)(cmd, args); err != nil {
@@ -50,7 +50,10 @@ func RootCommand(f kcmdutil.Factory, streams genericclioptions.IOStreams) *cobra
 			return nil
 		},
 	}
-
+	flags := rootCmd.Flags()
+	rootOptions.SecurityOptions.Bind(flags)
+	rootOptions.FilterOptions.Bind(flags)
+	rootOptions.ParallelOptions.Bind(flags)
 	return rootCmd
 }
 
