@@ -16,15 +16,19 @@ The oc-rpm is a CLI plug-in that works with oc/kubectl and gives the list of RPM
 ```bash
 curl -#Lo oc-rpm $(curl -s https://api.github.com/repos/kevydotvinu/oc-rpm/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux")) | .browser_download_url')
 sudo mv oc-rpm /usr/local/bin/ && sudo chmod +x /usr/local/bin/oc-rpm
-oc rpm 4.13.0
 ```
 
 ### Usage
 ##### List RPMs in a local cluster
 ```bash
+export REGISTRY_AUTH_FILE=<pullsecret path>
 oc rpm
 ```
 ##### List RPMs in an OpenShift release
 ```bash
+export REGISTRY_AUTH_FILE=<pullsecret path>
 oc rpm 4.13.0
 ```
+> Default path of the authentication file is `${XDG_RUNTIME_DIR}/containers/auth.json` on Linux, and `$HOME/.config/containers/auth.json` on Windows/macOS. The file is created by podman login. If the authorization state is not found there, `$HOME/.docker/config.json` is checked, which is set using docker login.
+
+> There is also the option to override the default path of the authentication file by setting the `REGISTRY_AUTH_FILE` environment variable. This can be done with `export REGISTRY_AUTH_FILE=path`.
